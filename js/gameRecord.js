@@ -124,6 +124,7 @@ async function startNextRound(params) {
   }
 }
 
+export let timeLeft = 0;
 
 export async function startCountdown(endTime, params, issueNumber) {
   const displayElement = period_time;
@@ -143,7 +144,7 @@ export async function startCountdown(endTime, params, issueNumber) {
 
   displayElement.timerInterval = setInterval(() => {
     const now = Date.now();
-    const timeLeft = Math.max(0, endTime.getTime() - now);
+    timeLeft = Math.max(0, endTime.getTime() - now);
 
     // Display countdown and manage bettingMark visibility
     if (bettingMark) {

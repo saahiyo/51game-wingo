@@ -1,7 +1,8 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
-import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, winDialog, closeBtn , sec3Btn, money} from './elements.js';
-import { winBonus } from './elements.js';
+import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn , sec3Btn, money} from './elements.js';
+import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } from './elements.js';
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay} from './elements.js';
+import { timeLeft } from './gameRecord.js';
 
 export function initGameListEvents() {
     const gameListContainer = document.querySelector('.GameList__C');
@@ -251,7 +252,7 @@ export function handle_winLoss() {
 export function howToBtn(){
     howtoBtn.addEventListener("click", () => {
         ruleDialog.style.display = "";
-        vanOverlay.style.display = "block";
+        vanOverlay.style.display = "block";  
         document.body.classList.add('van-overflow-hidden');
     });
     ruleCloseBtn.addEventListener("click", () => {
