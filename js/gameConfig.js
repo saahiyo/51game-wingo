@@ -1,6 +1,6 @@
-export let gameConfig = {
-    numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    bigSmall: ['big', 'small'],
-    color: ['red','green','violet']
-}
-
+export const gameData = [
+    { randomNumber: 7, isBig: true, showRed: false, showGreen: true },
+    { randomNumber: 5, isBig: false, showRed: true, showGreen: false },
+    { randomNumber: 9, isBig: true, showRed: false, showGreen: true },
+    { randomNumber: 2, isBig: false, showRed: true, showGreen: false },
+  ];

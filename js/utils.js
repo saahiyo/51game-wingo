@@ -145,6 +145,8 @@ async function handleApiResponse(apiResponse, params) {
 
 export async function handleGameItemClicked(item, timeLeftName) {
   const gameData = GAME_DETAILS[item];
+  console.log(gameData);
+  
   
   if (!gameData) {
     console.error("Unknown game clicked");

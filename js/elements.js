@@ -8,7 +8,7 @@ export let bettingOn_violet = document.querySelector('.Betting__C-head-p');
 export let bettingOn_green = document.querySelector('.Betting__C-head-g');
 // overlays and popup
 export let overlay = document.querySelector('.van-overlay[data-v-7f36fe93]'); // select black viel
-export let dialogDiv = document.querySelector('div[role="dialog"]'); // Select the dialog div
+export let dialogDiv = document.querySelector('div[role="dialog"][data-v-7f36fe93]'); // Select the dialog div
 export let bettingPopup = document.querySelector('[data-v-7f36fe93].Betting__Popup-10'); // changing color popup
 export const isAgree = document.querySelector(".Betting__Popup-agree"); // agree checkbox
 //showing win / loss dialog
@@ -23,6 +23,6 @@ export const closeBtn = document.querySelector(".closeBtn"); // close icon butto
 export const sec3Btn = document.querySelector(".acitveBtn"); // 3 second close icon button
 // rules dialog
 export const ruleDialog = document.querySelector("div[role='dialog'][data-v-0bba67ea]"); // main dialog
-export const howtoBtn = document.querySelector(".TimeLeft__C-rule"); // how to play button
+export const howtoBtn = document.querySelector(".TimeLeft__C-rule"); 
 export const ruleCloseBtn = document.querySelector(".TimeLeft__C-PreSale-foot-btn"); // rule dialog close icon
 export const vanOverlay = document.querySelector(".van-overlay[data-v-7f36fe93]"); // overlay

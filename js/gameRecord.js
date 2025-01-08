@@ -1,18 +1,11 @@
 // gameRecord.js
 import { period_time, period_number } from "./elements.js";
 import { getGameIssue } from "./api.js";
+import { gameData } from "./gameConfig.js";
 
 let nextRoundData = null;
 let isTransitioning = false;
 let rowInserted = false;
-
-// Static array of game data
-const gameData = [
-  { randomNumber: 7, isBig: true, showRed: false, showGreen: true },
-  { randomNumber: 5, isBig: false, showRed: true, showGreen: false },
-  { randomNumber: 9, isBig: true, showRed: false, showGreen: true },
-  { randomNumber: 2, isBig: false, showRed: true, showGreen: false },
-];
 
 let gameDataIndex = 0;
 
