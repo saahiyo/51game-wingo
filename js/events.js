@@ -1,5 +1,6 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
-import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup } from './elements.js';
+import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, winDialog, closeBtn , sec3Btn} from './elements.js';
+import { winBonus } from './elements.js';
 
 export function initGameListEvents() {
     const gameListContainer = document.querySelector('.GameList__C');
@@ -88,8 +89,6 @@ export function handleBettingOverlay() {
 }
 
 export function handleBettingOverlay_clicks() {
-    const isAgree = document.querySelector(".Betting__Popup-agree");
-    const totalAmountDiv = document.querySelector(".Betting__Popup-foot-s");
     const inputField = document.querySelector("#van-field-5-input");
     const allItems = document.querySelectorAll('.Betting__Popup-body-line-item');
 
@@ -169,8 +168,6 @@ export function handleBettingOverlay_clicks() {
         updateTotalAmount();
     });
 
-
-
     // Increment and Decrement Buttons Logic
     const decrementBtn = document.querySelector(".Betting__Popup-btn:first-child");
     const incrementBtn = document.querySelector(".Betting__Popup-btn:last-child");
@@ -234,5 +231,21 @@ export function handleBettingOverlay_clicks() {
     updateTotalAmount();
 }
 
+export function handle_winLoss() {
+    totalAmountDiv.addEventListener("click", function () {
+        overlay?.style.setProperty('display', 'none');
+        dialogDiv?.style.setProperty('display', 'none');
+        winDialog.removeAttribute("style");
+    });
+    closeBtn.addEventListener("click", function () {
+        winDialog.style.setProperty('display', 'none');
+        document.body.classList.remove('van-overflow-hidden');
+    })
+    sec3Btn.addEventListener("click", function(){
+        sec3Btn.classList.toggle("active")
+    })
+}
+
+handle_winLoss();
 handleBettingOverlay();
 handleBettingOverlay_clicks();
