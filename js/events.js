@@ -1,5 +1,5 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
-import { period_time , bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup } from './elements.js';
+import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup } from './elements.js';
 
 export function initGameListEvents() {
     const gameListContainer = document.querySelector('.GameList__C');
@@ -15,7 +15,7 @@ export function initGameListEvents() {
                     innerItem.classList.remove('active');
                 });
                 item.classList.add('active');
-                
+
                 const textContent = item.textContent.trim();
                 handleGameItemClicked(textContent, timeLeftName);
                 onClicked(textContent);
@@ -31,12 +31,12 @@ export function handleBettingOverlay() {
     const cancelButton = document.querySelector('.Betting__Popup-foot-c');
     const bettingCMark = document.querySelector('.Betting__C-mark');
 
-        const updatePopupClass = (newClassSuffix) => {
-            if (bettingPopup) {
-                bettingPopup.className = bettingPopup.className.replace(/Betting__Popup-\d+/, '');
-                bettingPopup.classList.add(`Betting__Popup-${newClassSuffix}`);
-            }
-        };
+    const updatePopupClass = (newClassSuffix) => {
+        if (bettingPopup) {
+            bettingPopup.className = bettingPopup.className.replace(/Betting__Popup-\d+/, '');
+            bettingPopup.classList.add(`Betting__Popup-${newClassSuffix}`);
+        }
+    };
 
     // Add click listeners to betting buttons
     bettingButtons.forEach(button => {
@@ -49,7 +49,7 @@ export function handleBettingOverlay() {
                 } else if (button === bettingOn_violet) {
                     updatePopupClass('12');
                 }
-                
+
                 overlay?.style.removeProperty('display');
                 dialogDiv?.style.removeProperty('display');
                 document.body.classList.add('van-overflow-hidden');
@@ -87,4 +87,152 @@ export function handleBettingOverlay() {
     }
 }
 
+export function handleBettingOverlay_clicks() {
+    const isAgree = document.querySelector(".Betting__Popup-agree");
+    const totalAmountDiv = document.querySelector(".Betting__Popup-foot-s");
+    const inputField = document.querySelector("#van-field-5-input");
+    const allItems = document.querySelectorAll('.Betting__Popup-body-line-item');
+
+    const balanceItems = Array.from(allItems).filter((item) =>
+        /^\d+$/.test(item.textContent.trim())
+    );
+    const quantityItems = Array.from(allItems).filter((item) =>
+        /^X\d+$/.test(item.textContent.trim())
+    );
+
+    let isAgreedActive = false;
+    isAgree?.addEventListener('click', () => {
+        isAgree.classList.toggle('active');
+        isAgreedActive = isAgree.classList.contains('active');
+    });
+
+    console.log('Balance Items:', balanceItems);
+    console.log('Quantity Items:', quantityItems);
+
+    let selectedBalance = 1;
+    let selectedQuantity = 1;
+
+    inputField.value = selectedQuantity;
+
+    function handleSelection(event, items) {
+        items.forEach(item => item.classList.remove('bgcolor'));
+        event.target.classList.add('bgcolor');
+    }
+
+    // Update your click handlers to only remove bgcolor from their respective groups
+    balanceItems.forEach(item => {
+        item.addEventListener("click", (event) => {
+            handleSelection(event, balanceItems);
+            selectedBalance = parseInt(item.textContent.trim(), 10);
+            updateTotalAmount(); // Update the total amount
+        });
+    });
+
+    quantityItems.forEach(item => {
+        item.addEventListener("click", (event) => {
+            handleSelection(event, quantityItems);
+            inputField.value = item.textContent.trim().replace('X', '')
+            selectedQuantity = parseInt(item.textContent.trim().replace('X', ''), 10);
+            updateTotalAmount();
+        });
+    });
+
+    inputField.addEventListener("input", function () {
+        // Ensure the input has a maximum of 4 digits
+        let value = this.value;
+
+        // Remove any characters beyond 4 digits
+        if (value.length > 4) {
+            this.value = value.slice(0, 4);
+            return;
+        }
+        if (!/^\d*$/.test(value)) {
+            this.value = value.slice(0, -1); // Remove invalid characters
+            return;
+        }
+
+        // Parse the value and update selectedQuantity
+        value = parseInt(this.value, 10) || 0;
+        selectedQuantity = value;
+
+        // Remove bgcolor from all multiplier items since we're using a custom value
+        quantityItems.forEach(btn => btn.classList.remove("bgcolor"));
+
+        // Check if the value matches any multiplier and highlight it
+        quantityItems.forEach(item => {
+            const multiplierValue = parseInt(item.textContent.trim().replace('X', ''));
+            if (multiplierValue === value) {
+                item.classList.add("bgcolor");
+            }
+        });
+
+        updateTotalAmount();
+    });
+
+
+
+    // Increment and Decrement Buttons Logic
+    const decrementBtn = document.querySelector(".Betting__Popup-btn:first-child");
+    const incrementBtn = document.querySelector(".Betting__Popup-btn:last-child");
+
+    decrementBtn.addEventListener("click", function () {
+        let currentValue = parseInt(inputField.value) || 1;
+        if (currentValue > 1) {
+            currentValue--;
+            inputField.value = currentValue;
+            selectedQuantity = currentValue;
+
+            // Update multiplier highlighting
+            quantityItems.forEach(item => {
+                item.classList.remove("bgcolor");
+                const multiplierValue = parseInt(item.textContent.trim().replace('X', ''));
+                if (multiplierValue === currentValue) {
+                    item.classList.add("bgcolor");
+                }
+            });
+
+            updateTotalAmount();
+        }
+    });
+
+    incrementBtn.addEventListener("click", function () {
+        let currentValue = parseInt(inputField.value) || 1;
+        if (currentValue < 100) {
+            currentValue++;
+            inputField.value = currentValue;
+            selectedQuantity = currentValue;
+
+            // Update multiplier highlighting
+            quantityItems.forEach(item => {
+                item.classList.remove("bgcolor");
+                const multiplierValue = parseInt(item.textContent.trim().replace('X', ''));
+                if (multiplierValue === currentValue) {
+                    item.classList.add("bgcolor");
+                }
+            });
+
+            updateTotalAmount();
+        }
+    });
+
+    // Update total amount display
+    function updateTotalAmount() {
+        const total = selectedBalance * selectedQuantity;
+        totalAmountDiv.textContent = `Total amount ₹${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    // Cancel button functionality
+    const cancelBtn = document.querySelector(".Betting__Popup-foot-c");
+    cancelBtn.addEventListener("click", function () {
+        const popup = document.querySelector(".van-popup");
+        if (popup) {
+            popup.style.display = "none";
+        }
+    });
+
+    // Initialize with default values
+    updateTotalAmount();
+}
+
 handleBettingOverlay();
+handleBettingOverlay_clicks();
