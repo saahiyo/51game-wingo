@@ -1,6 +1,7 @@
 export let period_number = document.querySelector('.TimeLeft__C-id');
 export let period_time = document.querySelector('.TimeLeft__C-time');
 export let gameRecord_body = document.querySelector('.GameRecord__C-body');
+export let money = document.querySelector(".Wallet__C-balance-l1[data-v-7dd1adab]")
 // bettonOn buttons green/violet/red
 export let bettingOn_red = document.querySelector('.Betting__C-head-r');
 export let bettingOn_violet = document.querySelector('.Betting__C-head-p');
@@ -20,3 +21,8 @@ export const winSmallBig = document.querySelector("[data-v-e44179e3]"); // small
 export const winColor = document.querySelector("[data-v-e44179e3]"); // winning color 
 export const closeBtn = document.querySelector(".closeBtn"); // close icon button
 export const sec3Btn = document.querySelector(".acitveBtn"); // 3 second close icon button
+// rules dialog
+export const ruleDialog = document.querySelector("div[role='dialog'][data-v-0bba67ea]"); // main dialog
+export const howtoBtn = document.querySelector(".TimeLeft__C-rule"); // how to play button
+export const ruleCloseBtn = document.querySelector(".TimeLeft__C-PreSale-foot-btn"); // rule dialog close icon
+export const vanOverlay = document.querySelector(".van-overlay[data-v-7f36fe93]"); // overlay
