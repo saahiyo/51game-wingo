@@ -2,6 +2,7 @@
 import { period_time, period_number } from "./elements.js";
 import { getGameIssue } from "./api.js";
 import { gameData } from "./gameConfig.js";
+import { checkTimeLeft5sec, whenTimeFinished } from "./events.js";
 
 let nextRoundData = null;
 let isTransitioning = false;
@@ -146,9 +147,14 @@ export async function startCountdown(endTime, params, issueNumber) {
     const now = Date.now();
     timeLeft = Math.max(0, endTime.getTime() - now);
 
+    if (timeLeft <= 0) {
+      whenTimeFinished();
+    }
+
     // Display countdown and manage bettingMark visibility
     if (bettingMark) {
       if (timeLeft <= 6000 && timeLeft > 0) {
+        checkTimeLeft5sec(timeLeft);
         const seconds = Math.floor((timeLeft / 1000) % 60);
         const secondTens = Math.floor(seconds / 10);
         const secondOnes = seconds % 10;
@@ -166,6 +172,7 @@ export async function startCountdown(endTime, params, issueNumber) {
         });
       }
     }
+
 
     if (timeLeft <= 0) {
       clearInterval(displayElement.timerInterval);

@@ -1,8 +1,8 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
-import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn , sec3Btn, money} from './elements.js';
+import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn, money } from './elements.js';
 import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } from './elements.js';
-import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay} from './elements.js';
-import { timeLeft } from './gameRecord.js';
+import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay } from './elements.js';
+export let isBetted = false;
 
 export function initGameListEvents() {
     const gameListContainer = document.querySelector('.GameList__C');
@@ -107,8 +107,8 @@ export function handleBettingOverlay_clicks() {
         isAgreedActive = isAgree.classList.contains('active');
     });
 
-    console.log('Balance Items:', balanceItems);
-    console.log('Quantity Items:', quantityItems);
+    // console.log('Balance Items:', balanceItems);
+    // console.log('Quantity Items:', quantityItems);
 
     let selectedBalance = 1;
     let selectedQuantity = 1;
@@ -236,23 +236,23 @@ export function handleBettingOverlay_clicks() {
 
 export function handle_winLoss() {
     totalAmountDiv.addEventListener("click", function () {
-        overlay?.style.setProperty('display', 'none');
-        dialogDiv?.style.setProperty('display', 'none');
-        winDialog.removeAttribute("style");
+        isBetted = true;
+        console.log(isBetted);
+
     });
     closeBtn.addEventListener("click", function () {
         winDialog.style.setProperty('display', 'none');
         document.body.classList.remove('van-overflow-hidden');
     })
-    sec3Btn.addEventListener("click", function(){
+    sec3Btn.addEventListener("click", function () {
         sec3Btn.classList.toggle("active")
     })
 }
 
-export function howToBtn(){
+export function howToBtn() {
     howtoBtn.addEventListener("click", () => {
         ruleDialog.style.display = "";
-        vanOverlay.style.display = "block";  
+        vanOverlay.style.display = "block";
         document.body.classList.add('van-overflow-hidden');
     });
     ruleCloseBtn.addEventListener("click", () => {
@@ -260,6 +260,20 @@ export function howToBtn(){
         vanOverlay.style.display = "none";
         document.body.classList.remove('van-overflow-hidden');
     });
+}
+
+export function checkTimeLeft5sec(timeLeft) {
+    console.log(timeLeft);
+}
+export function whenTimeFinished() {
+    if (isBetted) {
+        console.log("is betted!");
+        overlay?.style.setProperty('display', 'none');
+        dialogDiv?.style.setProperty('display', 'none');
+        winDialog.removeAttribute("style");
+    }
+    console.log("Time's up!");
+    isBetted = false;
 }
 
 howToBtn();
