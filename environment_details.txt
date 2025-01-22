@@ -1,0 +1,15 @@
+# VSCode Visible Files
+js/gameRecord.js
+
+# VSCode Open Tabs
+js/events.js
+js/gameRecord.js
+js/main.js
+index.html
+js/elements.js
+
+# Current Time
+1/23/2025, 1:57:26 AM (Asia/Calcutta, UTC+5.5:00)
+
+# Current Mode
+ACT MODE
