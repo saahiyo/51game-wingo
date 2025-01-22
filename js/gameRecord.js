@@ -1,5 +1,5 @@
 // gameRecord.js
-import { period_time, period_number } from "./elements.js";
+import { period_time, period_number, money } from "./elements.js";
 import { getGameIssue } from "./api.js";
 import { gameData } from "./gameConfig.js";
 import { checkTimeLeft5sec, whenTimeFinished } from "./events.js";

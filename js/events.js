@@ -1,7 +1,7 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
 import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn, money } from './elements.js';
 import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } from './elements.js';
-import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay } from './elements.js';
+import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
 export let isBetted = false;
 
 export function initGameListEvents() {
@@ -107,9 +107,6 @@ export function handleBettingOverlay_clicks() {
         isAgreedActive = isAgree.classList.contains('active');
     });
 
-    // console.log('Balance Items:', balanceItems);
-    // console.log('Quantity Items:', quantityItems);
-
     let selectedBalance = 1;
     let selectedQuantity = 1;
 
@@ -213,11 +210,21 @@ export function handleBettingOverlay_clicks() {
             updateTotalAmount();
         }
     });
+    
+    totalAmountDiv.addEventListener("click", function () {
+        betTextToast.style.display = ""; 
+        overlay?.style.setProperty('display', 'none');
+        dialogDiv?.style.setProperty('display', 'none');
+        document.body.classList.remove('van-overflow-hidden');
+        setTimeout(function() {
+          betTextToast.style.display = "none";
+        }, 2000);
+          
+    });
 
     // Update total amount display
     function updateTotalAmount() {
         const total = selectedBalance * selectedQuantity;
-        // money -= total
         totalAmountDiv.textContent = `Total amount ₹${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 
