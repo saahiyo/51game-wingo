@@ -1,7 +1,7 @@
 export let period_number = document.querySelector('.TimeLeft__C-id');
 export let period_time = document.querySelector('.TimeLeft__C-time');
 export let gameRecord_body = document.querySelector('.GameRecord__C-body');
-export let money = document.querySelector('.Wallet__C-balance-l1 > div[data-v-7dd1adab]');
+export var money = document.querySelector('.Wallet__C-balance-l1 > div[data-v-7dd1adab]');
 // bettonOn buttons green/violet/red
 export let bettingOn_red = document.querySelector('.Betting__C-head-r');
 export let bettingOn_violet = document.querySelector('.Betting__C-head-p');

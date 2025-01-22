@@ -1,7 +1,8 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
-import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn, money } from './elements.js';
+import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn } from './elements.js';
 import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } from './elements.js';
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
+import { money } from './elements.js';
 export let isBetted = false;
 
 export function initGameListEvents() {
@@ -210,16 +211,19 @@ export function handleBettingOverlay_clicks() {
             updateTotalAmount();
         }
     });
-    
+    let newBalance = 0;
     totalAmountDiv.addEventListener("click", function () {
+        const total = selectedBalance * selectedQuantity;
+        const currentBalance = parseFloat(money.textContent.replace('₹', '').replace(/,/g, ''));
+        newBalance = currentBalance - total;
+        money.textContent = `₹${newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         betTextToast.style.display = ""; 
         overlay?.style.setProperty('display', 'none');
         dialogDiv?.style.setProperty('display', 'none');
         document.body.classList.remove('van-overflow-hidden');
         setTimeout(function() {
-          betTextToast.style.display = "none";
+            betTextToast.style.display = "none";
         }, 2000);
-          
     });
 
     // Update total amount display
