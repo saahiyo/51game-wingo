@@ -15,11 +15,12 @@ export const isAgree = document.querySelector(".Betting__Popup-agree"); // agree
 export const totalAmountDiv = document.querySelector(".Betting__Popup-foot-s"); // dialog amount btn
 export const betTextToast = document.querySelector(".van-toast--text"); // bet success toast
 export const winDialog = document.querySelector(".WinningTip__C"); // main win dialog
-export const winBonus = document.querySelector(".bonus"); // winning bonus number 
+export const winBonus = document.querySelector(".bonus"); // winning bonus number
 export const winDetail = document.querySelector(".gameDetail"); // winning period number 
 export const winningNum = document.querySelector(".WinningNum"); // winning number 
-export const winSmallBig = document.querySelector("[data-v-e44179e3]"); // small or big winned
-export const winColor = document.querySelector("[data-v-e44179e3]"); // winning color 
+export const colorType = document.querySelector(".WinningTip__C-body-l2"); // color type of winning number
+export const winSmallBig = document.querySelector(".WinningTip__C-body-l2 > div:nth-child(3)"); // small or big winned
+export const winColor = document.querySelector(".WinningTip__C-body-l2 > div:nth-child(1)"); // winning color 
 export const closeBtn = document.querySelector(".closeBtn"); // close icon button
 export const sec3Btn = document.querySelector(".acitveBtn"); // 3 second close icon button
 // rules dialog
