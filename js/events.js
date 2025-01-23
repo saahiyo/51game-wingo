@@ -3,6 +3,7 @@ import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay,
 import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } from './elements.js';
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
 import { money } from './elements.js';
+import { updateWinDialog } from './updateWin.js';
 export let isBetted = false;
 
 export function initGameListEvents() {
@@ -90,7 +91,7 @@ export function handleBettingOverlay() {
         console.error('Betting__C-mark element not found.');
     }
 }
-
+export let newBalance = 0;
 export function handleBettingOverlay_clicks() {
     const inputField = document.querySelector("#van-field-5-input");
     const allItems = document.querySelectorAll('.Betting__Popup-body-line-item');
@@ -211,7 +212,6 @@ export function handleBettingOverlay_clicks() {
             updateTotalAmount();
         }
     });
-    let newBalance = 0;
     totalAmountDiv.addEventListener("click", function () {
         const total = selectedBalance * selectedQuantity;
         const currentBalance = parseFloat(money.textContent.replace('₹', '').replace(/,/g, ''));
@@ -249,7 +249,6 @@ export function handle_winLoss() {
     totalAmountDiv.addEventListener("click", function () {
         isBetted = true;
         console.log(isBetted);
-
     });
     closeBtn.addEventListener("click", function () {
         winDialog.style.setProperty('display', 'none');
@@ -274,7 +273,7 @@ export function howToBtn() {
 }
 
 export function checkTimeLeft5sec(timeLeft) {
-    console.log(timeLeft);
+    // console.log(timeLeft);
 }
 export function whenTimeFinished() {
     if (isBetted) {
@@ -283,6 +282,7 @@ export function whenTimeFinished() {
         dialogDiv?.style.setProperty('display', 'none');
         winDialog.removeAttribute("style");
     }
+    updateWinDialog();
     console.log("Time's up!");
     isBetted = false;
 }
