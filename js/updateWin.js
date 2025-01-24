@@ -6,8 +6,7 @@ import { newBalance , totalBetAmount} from "./events.js";
 // type0 = red+violet
 // type3 = green
 // type4 = red
-// type5 = yellow
-// type6 = green+violet
+// type5 = green+violet
 
 let gameDataIndex = 0;
 export function updateWinDialog() {
@@ -18,8 +17,7 @@ export function updateWinDialog() {
     winDetail.textContent = `Period: 30 seconds ${period_number.textContent}`;
     winSmallBig.textContent = gameData[gameDataIndex].isBig ? "Big" : "Small";
     winningNum.textContent = gameData[gameDataIndex].randomNumber;
-    winColor.textContent = getWinColorText(gameData[gameDataIndex]) === "type3" ? "Green" : "Red";
-
+    winColor.textContent =  getWinColorText(gameData[gameDataIndex]) === "type3" ? "Green" : gameData[gameDataIndex].mixedColor5 ? "Violet Green" : "Red";
 
     // console.log(totalBetAmount);
     
@@ -44,8 +42,8 @@ function getWinColorText(gameDataEntry) {
         return "type3"; 
     } else if (gameDataEntry.showRed && gameDataEntry.showViolet) {
         return "type0";
-    } else if (gameDataEntry.showGreen && gameDataEntry.showViolet) {
-        return "type6";
+    } else if (gameDataEntry.mixedColor5) {
+        return "type5";
     }
     return "Violet";
 }

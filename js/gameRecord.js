@@ -23,18 +23,23 @@ function addNewRow(container, params, issueNumber) {
   newRow.setAttribute("data-v-481307ec", "");
   newRow.className = "van-row";
 
-  const { randomNumber, isBig, showRed, showGreen } = gameData[gameDataIndex];
-  
+  const { randomNumber, isBig, showRed, showGreen, mixedColor5 } = gameData[gameDataIndex];
+
   // Ensure the index cycles correctly
   console.log("Using gameDataIndex:", gameDataIndex, gameData[gameDataIndex]);
   gameDataIndex = (gameDataIndex + 1) % gameData.length;
+
+  // Set the display conditions for green and violet blocks based on mixedColor5
+  const showGreenBlock = mixedColor5 ? 'block' : (showGreen ? 'block' : 'none');
+  const showRedBlock = mixedColor5 ? 'none' : (showRed ? 'block' : 'none');
+  const showVioletBlock = mixedColor5 ? 'block' : 'none';
 
   newRow.innerHTML = `
     <div data-v-481307ec="" class="van-col van-col--9">
       ${issueNumber}
     </div>
     <div data-v-481307ec="" class="van-col van-col--5 numcenter">
-      <div data-v-481307ec="" class="GameRecord__C-body-num ${showRed ? 'defaultColor' : 'greenColor'}">
+      <div data-v-481307ec="" class="GameRecord__C-body-num ${randomNumber === 5 ? 'mixedColor5' : (showRed ? 'defaultColor' : 'greenColor')}">
         ${randomNumber}
       </div>
     </div>
@@ -45,11 +50,15 @@ function addNewRow(container, params, issueNumber) {
       <div data-v-481307ec="" class="GameRecord__C-origin">
         <div data-v-481307ec="" 
              class="GameRecord__C-origin-I ${showRed ? 'red' : ''}"
-             style="display: ${showRed ? 'block' : 'none'}">
+             style="display: ${showRedBlock}">
         </div>
         <div data-v-481307ec="" 
-             class="GameRecord__C-origin-I ${showGreen ? 'green' : ''}"
-             style="display: ${showGreen ? 'block' : 'none'}">
+             class="GameRecord__C-origin-I green"
+             style="display: ${showGreenBlock}">
+        </div>
+        <div data-v-481307ec="" 
+             class="GameRecord__C-origin-I violet"
+             style="display: ${showVioletBlock}">
         </div>
       </div>
     </div>

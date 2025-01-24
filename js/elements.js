@@ -28,3 +28,5 @@ export const ruleDialog = document.querySelector("div[role='dialog'][data-v-0bba
 export const howtoBtn = document.querySelector(".TimeLeft__C-rule"); 
 export const ruleCloseBtn = document.querySelector(".TimeLeft__C-PreSale-foot-btn"); // rule dialog close icon
 export const vanOverlay = document.querySelector(".van-overlay[data-v-7f36fe93]"); // overlay
+// colorful number tokens
+export const tokenParent = document.querySelector(".TimeLeft__C-num"); // timer side tokens parent div

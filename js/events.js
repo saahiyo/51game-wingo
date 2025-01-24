@@ -1,10 +1,11 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
 import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn } from './elements.js';
-import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } from './elements.js';
+import { winDialog } from './elements.js';
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
 import { money } from './elements.js';
 import { updateWinDialog } from './updateWin.js';
 import { handleMoneys } from './handleMoney.js';
+import { colorTokens } from './colorTokens.js';
 export let isBetted = false;
 
 export function initGameListEvents() {
@@ -288,7 +289,8 @@ export function whenTimeFinished() {
     }
     updateWinDialog();
     handleMoneys();
-    console.log("Time's up!");
+    colorTokens();
+    // console.log("Time's up!");
     isBetted = false;
 }
 
