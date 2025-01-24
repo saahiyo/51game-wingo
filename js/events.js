@@ -4,6 +4,7 @@ import { winDialog, winBonus, winDetail, winningNum, winSmallBig, winColor } fro
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
 import { money } from './elements.js';
 import { updateWinDialog } from './updateWin.js';
+import { handleMoneys } from './handleMoney.js';
 export let isBetted = false;
 
 export function initGameListEvents() {
@@ -93,6 +94,7 @@ export function handleBettingOverlay() {
 }
 export let newBalance = 0;
 export let totalBetAmount = 0;
+
 export function handleBettingOverlay_clicks() {
     const inputField = document.querySelector("#van-field-5-input");
     const allItems = document.querySelectorAll('.Betting__Popup-body-line-item');
@@ -214,9 +216,9 @@ export function handleBettingOverlay_clicks() {
         }
     });
     totalAmountDiv.addEventListener("click", function () {
-        const total = selectedBalance * selectedQuantity;
+        let total = selectedBalance * selectedQuantity;
         totalBetAmount = total;
-        const currentBalance = parseFloat(money.textContent.replace('₹', '').replace(/,/g, ''));
+        let currentBalance = parseFloat(money.textContent.replace('₹', '').replace(/,/g, ''));
         newBalance = currentBalance - total;
         money.textContent = `₹${newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         betTextToast.style.display = ""; 
@@ -285,6 +287,7 @@ export function whenTimeFinished() {
         winDialog.removeAttribute("style");
     }
     updateWinDialog();
+    handleMoneys();
     console.log("Time's up!");
     isBetted = false;
 }

@@ -20,17 +20,18 @@ export function updateWinDialog() {
     winningNum.textContent = gameData[gameDataIndex].randomNumber;
     winColor.textContent = getWinColorText(gameData[gameDataIndex]) === "type3" ? "Green" : "Red";
 
-    // console.log(totalBetAmount);
 
+    // console.log(totalBetAmount);
+    
     const regex = /^type/;
     colorType.classList.forEach(className => {
         if (regex.test(className)) {
             colorType.classList.remove(className);
         }
     });
-
-    colorType.classList.add(winColorType);
+    
     let winColorType =  getWinColorText(gameData[gameDataIndex]);
+    colorType.classList.add(winColorType);
 
     // Increment gameDataIndex
     gameDataIndex = (gameDataIndex + 1) % gameData.length;
