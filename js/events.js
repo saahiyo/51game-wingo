@@ -92,6 +92,7 @@ export function handleBettingOverlay() {
     }
 }
 export let newBalance = 0;
+export let totalBetAmount = 0;
 export function handleBettingOverlay_clicks() {
     const inputField = document.querySelector("#van-field-5-input");
     const allItems = document.querySelectorAll('.Betting__Popup-body-line-item');
@@ -214,6 +215,7 @@ export function handleBettingOverlay_clicks() {
     });
     totalAmountDiv.addEventListener("click", function () {
         const total = selectedBalance * selectedQuantity;
+        totalBetAmount = total;
         const currentBalance = parseFloat(money.textContent.replace('₹', '').replace(/,/g, ''));
         newBalance = currentBalance - total;
         money.textContent = `₹${newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
