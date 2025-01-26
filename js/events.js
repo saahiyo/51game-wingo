@@ -24,8 +24,11 @@ export function initGameListEvents() {
                 item.classList.add('active');
 
                 const textContent = item.textContent.trim();
-                handleGameItemClicked(textContent, timeLeftName);
-                onClicked(textContent);
+                const formattedText = textContent.replace(/Go(\d+)/g, 'Go $1');
+                console.log('Game item clicked:', formattedText);
+                
+                handleGameItemClicked(formattedText, timeLeftName);
+                onClicked(formattedText);
             });
         });
     } else {
