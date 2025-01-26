@@ -11,6 +11,7 @@ export let overlay = document.querySelector('.van-overlay[data-v-7f36fe93]'); //
 export let dialogDiv = document.querySelector('div[role="dialog"][data-v-7f36fe93]'); // Select the dialog div
 export let bettingPopup = document.querySelector('[data-v-7f36fe93].Betting__Popup-10'); // changing color popup
 export const isAgree = document.querySelector(".Betting__Popup-agree"); // agree checkbox
+export const InsufficientBalance = document.querySelector(".van-toast--fail"); // insufficient balance toast
 //showing win / loss dialog
 export const totalAmountDiv = document.querySelector(".Betting__Popup-foot-s"); // dialog amount btn
 export const betTextToast = document.querySelector(".van-toast--text"); // bet success toast

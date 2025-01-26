@@ -67,7 +67,7 @@ function addNewRow(container, issueNumber) {
         while (container.children.length > 10) {
             container.lastElementChild.remove();
         }
-        rowInserted = false; // Reset for next round
+        rowInserted = false;
     });
 }
 

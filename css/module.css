@@ -4897,7 +4897,7 @@ ul {
     color: var(--van-toast-text-color);
     font-size: var(--van-toast-font-size);
     line-height: var(--van-toast-line-height);
-    white-space: pre-wrap;
+    /* white-space: pre-wrap; */
     word-break: break-all;
     text-align: center;
     background: var(--van-toast-background);

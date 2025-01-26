@@ -3,6 +3,7 @@ import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay,
 import { winDialog } from './elements.js';
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
 import { money } from './elements.js';
+import { InsufficientBalance } from './elements.js';
 import { updateWinDialog } from './updateWin.js';
 import { handleMoneys } from './handleMoney.js';
 import { colorTokens } from './colorTokens.js';
@@ -219,6 +220,17 @@ export function handleBettingOverlay_clicks() {
         totalBetAmount = total;
         let currentBalance = parseFloat(money.textContent.replace('₹', '').replace(/,/g, ''));
         newBalance = currentBalance - total;
+
+        if (newBalance < 0) {
+            InsufficientBalance.style.opacity = "1";
+            InsufficientBalance.style.display = "";
+            setTimeout( () => {
+                InsufficientBalance.style.opacity = "0";
+                InsufficientBalance.style.display = "none";
+            }, 2000);
+            return;
+        }
+        
         money.textContent = `₹${newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         betTextToast.style.display = ""; 
         overlay?.style.setProperty('display', 'none');
