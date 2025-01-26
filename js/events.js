@@ -73,7 +73,6 @@ export function handleBettingOverlay() {
         document.body.classList.remove('van-overflow-hidden');
     });
 
-    // Manage bettingCMark visibility
     if (bettingCMark) {
         const checkMarkVisibility = () => {
             if (!bettingCMark.style.display) {
@@ -81,13 +80,9 @@ export function handleBettingOverlay() {
                 dialogDiv?.style.setProperty('display', 'none');
             }
         };
-
         checkMarkVisibility();
-
         const observer = new MutationObserver(checkMarkVisibility);
         observer.observe(bettingCMark, { attributes: true, attributeFilter: ['style'] });
-
-        // Cleanup observer
         return () => observer.disconnect();
     } else {
         console.error('Betting__C-mark element not found.');
@@ -246,7 +241,6 @@ export function handleBettingOverlay_clicks() {
         }
     });
 
-    // Initialize with default values
     updateTotalAmount();
 }
 
@@ -300,6 +294,10 @@ export function checkTimeLeft5sec(timeLeft) {
         voice2.currentTime = 0;
         voice2.play();
     }
+
+    overlay?.style.setProperty('display', 'none');
+    dialogDiv?.style.setProperty('display', 'none');
+    document.body.classList.remove('van-overflow-hidden');
 }
 export function whenTimeFinished() {
     if (isBetted) {

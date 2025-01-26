@@ -22,7 +22,5 @@ export function colorTokens() {
             parentDiv.removeChild(parentDiv.lastElementChild);
         }
     }
-    
-
     currentIndex = (currentIndex + 1) % gameData.length;
 }

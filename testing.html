@@ -54,3 +54,31 @@
         </div>
     </div>
 </div>
+
+
+<script>
+const timer = setInterval(() => {
+    const date = new Date();
+    const seconds = date.getUTCSeconds();
+    const remainingSeconds = 60 - seconds;
+    const totalMinutes = date.getUTCHours() * 60 + date.getUTCMinutes();
+
+    // Format date as yyyyMMdd
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const yyyymmdd = `${year}${month}${day}`;
+
+    // Update period number for 1-minute interval
+    const periodNumber = 10001 + totalMinutes;
+    document.getElementById('period1m').textContent = `${yyyymmdd}1000${periodNumber}`;
+
+    // Format timer with spaces between digits
+    const minutesPart = String(0).padStart(2, '0');
+    const secondsPart = String(remainingSeconds).padStart(2, '0');
+    let formattedTime = `   ${minutesPart}  :  ${secondsPart}`;
+    formattedTime = formattedTime.replace(/(\d)(?=\d)/g, '$1 '); // Add space between digits
+
+    document.getElementById('timer1m').textContent = formattedTime;
+}, 1000); // Update every second
+</script>

@@ -8,33 +8,24 @@ const gameCache = new Map();
 const CACHE_DURATION = 30000; // 30 seconds cache duration
 
 // Game configuration
-const GAME_DETAILS = {
+export const GAME_DETAILS = {
   "Win Go 30s": { 
     typeId: 30, 
-    signature: "29407B5357867599357272C51D941C6A", 
-    random: "63a3ccd3f54842108ce90c4d4238eec0",
     interval: 30000
   },
   "Win Go 1Min": { 
-    typeId: 1, 
-    signature: "B56DCF4D4B79C4688423A40A738D50FF", 
-    random: "cf6cdf90be3047da8c9dd4b6b852b912",
+    typeId: 1,
     interval: 60000
   },
   "Win Go 3Min": { 
-    typeId: 2, 
-    signature: "FE7D3F18E6A30AB174A77B273F9DB3FA", 
-    random: "bf203c57e1c64fafb83c9c24a4420218",
+    typeId: 2,
     interval: 180000
   },
   "Win Go 5Min": { 
-    typeId: 3, 
-    signature: "068C4984619BFD1F4B946F34413EEC76", 
-    random: "6cdda089e4b14893bc9e5361704f0cb9",
+    typeId: 3,
     interval: 300000
   },
 };
-
 // Keep track of current game state
 let currentGame = null;
 let isTransitioning = false;

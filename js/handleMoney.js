@@ -1,11 +1,10 @@
 import { money , winBonus} from "./elements.js";
-import { newBalance, isBetted } from "./events.js";
+import { isBetted } from "./events.js";
 import { gameData } from "./gameConfig.js";
 import { period_number } from "./elements.js";
 import { totalBetAmount } from "./events.js";
 
 export function handleMoneys(){
-    // let myMoney = newBalance
     let bettedMoney = totalBetAmount
     let deduction = (bettedMoney / 100) * 2;
     let remainingAmount = bettedMoney - deduction;
