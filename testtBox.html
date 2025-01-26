@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Bouncing Orb</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        canvas {
+            border: 2px solid #1548e2;
+            border-radius: 50%;
+            box-shadow: 0 0 100px rgba(21, 72, 226, 0.2), inset 0 0 50px rgba(21, 72, 226, 0.1);        
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Setup canvas
+        const containerSize = 500;
+        canvas.width = containerSize;
+        canvas.height = containerSize;
+        
+        // Configuration
+        const config = {
+            ball: {
+                radius: 10,
+                baseSpeed: 8,
+                glowIntensity: 0.5,
+                color: [100, 50, 255]
+            },
+            particles: {
+                count: 100,
+                size: 2,
+                lifespan: 60,
+                spawnOnBounce: 15
+            },
+            mouse: {
+                influenceRadius: 150,
+                repulsionForce: 0.8
+            }
+        };
+
+        // Main orb
+        const orb = {
+            x: containerSize/2,
+            y: containerSize/2,
+            vx: Math.random() * config.ball.baseSpeed * 2 - config.ball.baseSpeed,
+            vy: Math.random() * config.ball.baseSpeed * 2 - config.ball.baseSpeed,
+            radius: config.ball.radius
+        };
+
+        // Particles array
+        let particles = [];
+        // Mouse position
+        let mouse = { x: -1000, y: -1000 };
+
+        // Event listeners
+        canvas.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 6;
+                this.vy = (Math.random() - 0.5) * 6;
+                this.alpha = 1;
+                this.color = color || [
+                    100 + Math.random() * 155,
+                    100 + Math.random() * 155,
+                    255
+                ];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= 1 / config.particles.lifespan;
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, config.particles.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function applyMouseForce() {
+            const dx = orb.x - mouse.x;
+            const dy = orb.y - mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < config.mouse.influenceRadius) {
+                const force = (config.mouse.influenceRadius - distance) / config.mouse.influenceRadius;
+                orb.vx += (dx / distance) * force * config.mouse.repulsionForce;
+                orb.vy += (dy / distance) * force * config.mouse.repulsionForce;
+            }
+        }
+
+        function checkBoundary() {
+            const dx = orb.x - containerSize/2;
+            const dy = orb.y - containerSize/2;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxDistance = containerSize/2 - orb.radius;
+
+            if (distance > maxDistance) {
+                // Collision response
+                const normalX = dx / distance;
+                const normalY = dy / distance;
+                
+                // Reflect velocity
+                const dot = orb.vx * normalX + orb.vy * normalY;
+                orb.vx = orb.vx - 2 * dot * normalX;
+                orb.vy = orb.vy - 2 * dot * normalY;
+
+                // Add particles
+                for (let i = 0; i < config.particles.spawnOnBounce; i++) {
+                    particles.push(new Particle(orb.x, orb.y));
+                }
+
+                // Position correction
+                orb.x = containerSize/2 + normalX * maxDistance;
+                orb.y = containerSize/2 + normalY * maxDistance;
+            }
+        }
+
+        function updateOrb() {
+            applyMouseForce();
+            
+            // Apply friction
+            orb.vx *= 0.995;
+            orb.vy *= 0.995;
+
+            // Update position
+            orb.x += orb.vx;
+            orb.y += orb.vy;
+
+            checkBoundary();
+        }
+
+        function drawOrb() {
+            // Orb glow
+            const gradient = ctx.createRadialGradient(
+                orb.x, orb.y, 0,
+                orb.x, orb.y, orb.radius * 4
+            );
+            gradient.addColorStop(0, `rgba(${config.ball.color},${config.ball.glowIntensity})`);
+            gradient.addColorStop(1, `rgba(${config.ball.color},0)`);
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(orb.x, orb.y, orb.radius * 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Orb body
+            ctx.fillStyle = `rgb(${config.ball.color})`;
+            ctx.beginPath();
+            ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            updateOrb();
+            drawOrb();
+
+            // Update and draw particles
+            particles.forEach((p, i) => {
+                p.update();
+                p.draw();
+                if (p.alpha <= 0) particles.splice(i, 1);
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Initial particles
+        for (let i = 0; i < config.particles.count; i++) {
+            particles.push(new Particle(
+                Math.random() * containerSize,
+                Math.random() * containerSize
+            ));
+        }
+
+        animate();
+    </script>
+</body>
+</html>

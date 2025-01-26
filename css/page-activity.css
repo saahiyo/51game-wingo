@@ -623,31 +623,31 @@
 }
 
 .activity-wrapper .activity-panel-header .header-item .bgcontainer.a1[data-v-4a7709f3] {
-    background: url(https://51game3.com/assets/png/activityReward-66772619.png) no-repeat;
+    background: url(../assets/png/activityReward-66772619.png) no-repeat;
     background-position: center;
     background-size: 1.06667rem, 1.06667rem
 }
 
 .activity-wrapper .activity-panel-header .header-item .bgcontainer.a2[data-v-4a7709f3] {
-    background: url(https://51game3.com/assets/png/invitationBonus-aa7acbd3.png) no-repeat;
+    background: url(../assets/png/invitationBonus-aa7acbd3.png) no-repeat;
     background-position: center;
     background-size: 1.06667rem, 1.06667rem
 }
 
 .activity-wrapper .activity-panel-header .header-item .bgcontainer.a3[data-v-4a7709f3] {
-    background: url(https://51game3.com/assets/png/BettingRebate-17d35455.png) no-repeat;
+    background: url(../assets/png/BettingRebate-17d35455.png) no-repeat;
     background-position: center;
     background-size: 1.06667rem, 1.06667rem
 }
 
 .activity-wrapper .activity-panel-header .header-item .bgcontainer.a4[data-v-4a7709f3] {
-    background: url(https://51game3.com/assets/png/superJackpot-ecb648b4.png) no-repeat;
+    background: url(../assets/png/superJackpot-ecb648b4.png) no-repeat;
     background-position: center;
     background-size: 1.06667rem, 1.06667rem
 }
 
 .activity-wrapper .activity-panel-header .header-item .bgcontainer.a5[data-v-4a7709f3] {
-    background: url(https://51game3.com/assets/png/memberGift-a0182789.png) no-repeat;
+    background: url(../assets/png/memberGift-a0182789.png) no-repeat;
     background-position: center;
     background-size: 1.06667rem, 1.06667rem
 }
@@ -1349,7 +1349,7 @@ html:lang(ar) .dropdown__list[data-v-5067ef5e] {
     height: 6.53333rem;
     margin-bottom: .42667rem;
     padding: 0 .4rem .26667rem;
-    background: url(https://51game3.com/assets/png/headerBg-c5504bca.png) no-repeat center/cover, #F54545 no-repeat center/cover
+    background: url(../assets/png/headerBg-c5504bca.png) no-repeat center/cover, #F54545 no-repeat center/cover
 }
 
 .dailySignIn__container-hero__header[data-v-f1e983bd] {
@@ -1584,7 +1584,7 @@ html:lang(ar) .dropdown__list[data-v-5067ef5e] {
 }
 
 .dailySignIn__container-content__wrapper-block.signed[data-v-f1e983bd] {
-    background: url(https://51game3.com/assets/png/Signed-dd8900d1.png) no-repeat;
+    background: url(../assets/png/Signed-dd8900d1.png) no-repeat;
     background-position: center;
     background-size: 96% 100%
 }
@@ -1598,7 +1598,7 @@ html:lang(ar) .dropdown__list[data-v-5067ef5e] {
 }
 
 .dailySignIn__container-content__wrapper-block.signed[data-v-f1e983bd]:last-of-type {
-    background: url(https://51game3.com/assets/png/day7BgActive-0b574f89.png) no-repeat;
+    background: url(../assets/png/day7BgActive-0b574f89.png) no-repeat;
     background-position: center;
     background-size: 100% 100%
 }
@@ -1663,7 +1663,7 @@ html:lang(ar) .dropdown__list[data-v-5067ef5e] {
     height: 3.46667rem;
     padding: .13333rem .26667rem;
     margin-bottom: .4rem;
-    background: url(https://51game3.com/assets/png/award_bg-00eaec82.png) no-repeat;
+    background: url(../assets/png/award_bg-00eaec82.png) no-repeat;
     background-size: 100% 3.46667rem;
     display: -webkit-box;
     display: -webkit-flex;
@@ -2263,8 +2263,8 @@ html:lang(ar) .rule>div[data-v-b64fa971]:not(.head):before {
     min-height: 3.86667rem;
     margin-bottom: .26667rem;
     padding: .34667rem 0;
-    background: url(https://51game3.com/assets/png/box-5efaaed8.png), -webkit-linear-gradient(347deg, #FAAC48 4.77%, #F7602B 96.1%);
-    background: url(https://51game3.com/assets/png/box-5efaaed8.png), linear-gradient(103deg, #FAAC48 4.77%, #F7602B 96.1%);
+    background: url(../assets/png/box-5efaaed8.png), -webkit-linear-gradient(347deg, #FAAC48 4.77%, #F7602B 96.1%);
+    background: url(../assets/png/box-5efaaed8.png), linear-gradient(103deg, #FAAC48 4.77%, #F7602B 96.1%);
     background-size: 100% 4.72rem
 }
 
@@ -2491,7 +2491,7 @@ html:lang(ar) .rule>div[data-v-b64fa971]:not(.head):before {
 }
 
 .package-item-head[data-v-82bb7bc5] {
-    background: url(https://51game3.com/assets/png/head-e5e097e3.png) no-repeat center/cover;
+    background: url(../assets/png/head-e5e097e3.png) no-repeat center/cover;
     height: 1.33333rem;
     font-size: .37333rem;
     font-style: normal;
@@ -2534,7 +2534,7 @@ html:lang(ar) .rule>div[data-v-b64fa971]:not(.head):before {
     width: 4.13333rem;
     height: 2.4rem;
     border-radius: .26667rem;
-    background: url(https://51game3.com/assets/png/bg-925fa3b7.png) no-repeat;
+    background: url(../assets/png/bg-925fa3b7.png) no-repeat;
     background-size: 4.13333rem, 2.4rem
 }
 
@@ -2684,7 +2684,7 @@ html:lang(ar) .rule>div[data-v-b64fa971]:not(.head):before {
     height: 3.73333rem;
     padding: .13333rem .2rem .26667rem;
     border-radius: .13333rem;
-    background: url(https://51game3.com/assets/png/headerBodyBg-ed92106e.png) no-repeat center var(--bgDark-2, var(--bg_color_L2));
+    background: url(../assets/png/headerBodyBg-ed92106e.png) no-repeat center var(--bgDark-2, var(--bg_color_L2));
     background-size: cover;
     box-shadow: var(--BoxShadowColor-33)
 }
@@ -2898,7 +2898,7 @@ html:lang(ar) .rule>div[data-v-b64fa971]:not(.head):before {
     align-items: center;
     padding-block: .09333rem;
     font-size: .29333rem;
-    background: url(https://51game3.com/assets/png/redeemdBg-11a66dae.png) no-repeat right/contain;
+    background: url(../assets/png/redeemdBg-11a66dae.png) no-repeat right/contain;
     z-index: 2;
     color: var(--text_white, var(--text_color_L4))
 }
@@ -4319,17 +4319,17 @@ html:lang(ar) .pointMall__container-products__tabs>div[data-v-aab298ee]:first-of
 }
 
 .ChampionshipDetail .rankingList .info .top1[data-v-a9d644da] {
-    background: url(https://51game3.com/assets/png/1-dcdd0031.png) no-repeat center;
+    background: url(../assets/png/1-dcdd0031.png) no-repeat center;
     background-size: .93333rem .93333rem
 }
 
 .ChampionshipDetail .rankingList .info .top2[data-v-a9d644da] {
-    background: url(https://51game3.com/assets/png/2-0c408958.png) no-repeat center;
+    background: url(../assets/png/2-0c408958.png) no-repeat center;
     background-size: .93333rem .93333rem
 }
 
 .ChampionshipDetail .rankingList .info .top3[data-v-a9d644da] {
-    background: url(https://51game3.com/assets/png/3-f5a58c12.png) no-repeat center;
+    background: url(../assets/png/3-f5a58c12.png) no-repeat center;
     background-size: .93333rem .93333rem
 }
 
@@ -7700,7 +7700,7 @@ html:lang(ar) .myOrders__container-item__header-left>div[data-v-588ebc06] {
     width: 100%;
     height: 3.2rem;
     color: var(--text_color_L1);
-    background: url(https://51game3.com/assets/png/recordHeaderBg-9f70ebdf.png) no-repeat;
+    background: url(../assets/png/recordHeaderBg-9f70ebdf.png) no-repeat;
     background-size: cover;
     background-color: var(--light-main-color, var(--bg_color_L2))
 }
@@ -8752,7 +8752,7 @@ html:lang(ar) .myOrders__container-item__header-left>div[data-v-588ebc06] {
     color: var(--text_color_L1);
     font-size: .42667rem;
     border-radius: .13333rem;
-    background: url(https://51game3.com/assets/png/claimRuleBg-98d00852.png) no-repeat center;
+    background: url(../assets/png/claimRuleBg-98d00852.png) no-repeat center;
     background-color: var(--main-color);
     background-position-x: .13333rem;
     background-size: cover

@@ -277,8 +277,29 @@ export function howToBtn() {
     });
 }
 
+let isVoiceDisabled = false;
+document.querySelectorAll('.disableVoice').forEach(element => {
+    element.addEventListener('click', () => {
+        isVoiceDisabled = !isVoiceDisabled;
+        element.classList.toggle('active', isVoiceDisabled);
+        console.log(`Voice ${isVoiceDisabled ? 'disabled' : 'enabled'}`);
+    });
+});
+
 export function checkTimeLeft5sec(timeLeft) {
-    // console.log(timeLeft);
+    const secondsLeft = Math.floor(timeLeft / 1000); 
+    console.log(secondsLeft);
+    if (isVoiceDisabled) return;
+    const voice1 = document.getElementById('voice1');
+    const voice2 = document.getElementById('voice2');
+
+    if (secondsLeft > 1) {
+        voice1.currentTime = 0;
+        voice1.play();
+    } else if (secondsLeft === 1) {
+        voice2.currentTime = 0;
+        voice2.play();
+    }
 }
 export function whenTimeFinished() {
     if (isBetted) {
@@ -290,7 +311,6 @@ export function whenTimeFinished() {
     updateWinDialog();
     handleMoneys();
     colorTokens();
-    // console.log("Time's up!");
     isBetted = false;
 }
 
