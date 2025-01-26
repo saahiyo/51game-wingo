@@ -51,8 +51,6 @@ function getWinColorText(gameDataEntry) {
 
 
 
-
-
 // rules text
  
 //  1 minutes 1 issue, 45 seconds to order, 15 seconds waiting for the draw. It opens all day. The total number of trade is 1440 issues.

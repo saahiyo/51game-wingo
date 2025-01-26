@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .container {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            padding: 2rem 5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .timer-text {
+            font-size: 2.5rem;
+            color: #00ff88;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+            letter-spacing: 2px;
+            margin: 0.5rem 0;
+        }
+        
+        .period-text {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #00ff88;
+            width: 100%;
+            transition: width 1s linear;
+        }
+        
+        .utc-time {
+            color: rgba(255,255,255,0.6);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="period-text" id="period1m"></div>
+        <div class="timer-text" id="timer1m"></div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        <div class="utc-time" id="utcTime"></div>
+    </div>
+
+    <script>
+        const period1m = document.getElementById('period1m');
+        const timer1m = document.getElementById('timer1m');
+        const progress = document.getElementById('progress');
+        const utcTime = document.getElementById('utcTime');
+        
+        let lastPeriod = -1;
+
+        function formatDigit(num) {
+            return String(num).padStart(2, '0').split('').join(' ');
+        }
+
+        function updateDisplay() {
+            const now = new Date();
+            
+            // Get UTC components
+            const year = now.getUTCFullYear();
+            const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(now.getUTCDate()).padStart(2, '0');
+            const hours = now.getUTCHours();
+            const minutes = now.getUTCMinutes();
+            const seconds = now.getUTCSeconds();
+            
+            // Calculate 30-second period
+            const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            const currentPeriod = Math.floor(totalSeconds / 30);
+            const remainingSeconds = 29 - (totalSeconds % 30);
+            
+            // Update period only when changed
+            if (currentPeriod !== lastPeriod) {
+                lastPeriod = currentPeriod;
+                period1m.textContent = `${year}${month}${day}1000${50001 + currentPeriod}`;
+            }
+            
+            // Update timer display
+            const timerString = `   ${formatDigit(0)}  :  ${formatDigit(remainingSeconds)}`;
+            timer1m.textContent = timerString;
+            
+            // Update progress bar
+            progress.style.width = `${(remainingSeconds / 29) * 100}%`;
+            
+            // Show current UTC time
+            utcTime.textContent = `UTC ${formatDigit(hours)}:${formatDigit(minutes)}:${formatDigit(seconds)}`;
+        }
+
+        // Initialize and update every second
+        setInterval(updateDisplay, 1000);
+        updateDisplay();
+    </script>
+</body>
+</html>
