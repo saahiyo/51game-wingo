@@ -50,7 +50,7 @@ A comprehensive implementation of a real-time betting game system with multiple 
 
 ### Installation
 ```
-git clone https://github.com/yourusername/51game-wingo.git
+git clone https://github.com/saahiyo/51game-wingo.git
 cd 51game-wingo
 npm install
 ```
