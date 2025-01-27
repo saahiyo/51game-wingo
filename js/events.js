@@ -1,5 +1,5 @@
 import { handleGameItemClicked, onClicked } from './utils.js';
-import { period_time, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn } from './elements.js';
+import { bettingOnNum_parent, bettingOn_red, bettingOn_green, bettingOn_violet, overlay, dialogDiv, bettingPopup, totalAmountDiv, isAgree, closeBtn, sec3Btn, selectedNum } from './elements.js';
 import { winDialog } from './elements.js';
 import { howtoBtn, ruleDialog, ruleCloseBtn, vanOverlay, betTextToast } from './elements.js';
 import { money } from './elements.js';
@@ -41,6 +41,9 @@ export function handleBettingOverlay() {
     const bettingButtons = [bettingOn_red, bettingOn_green, bettingOn_violet];
     const cancelButton = document.querySelector('.Betting__Popup-foot-c');
     const bettingCMark = document.querySelector('.Betting__C-mark');
+    const numCItems = document.querySelectorAll('.Betting__C-numC > div');
+    const bigButton = document.querySelector('.Betting__C-foot-b');
+    const smallButton = document.querySelector('.Betting__C-foot-s');
 
     const updatePopupClass = (newClassSuffix) => {
         if (bettingPopup) {
@@ -48,6 +51,44 @@ export function handleBettingOverlay() {
             bettingPopup.classList.add(`Betting__Popup-${newClassSuffix}`);
         }
     };
+
+    bigButton?.addEventListener('click', () => {
+        updatePopupClass('13');
+        if (selectedNum) {
+            const spans = selectedNum.querySelectorAll('span');
+            if (spans.length > 1) {
+                spans[1].textContent = 'Big';
+            }
+        }
+        updateOverlayDisplay();
+    });
+
+    
+    smallButton?.addEventListener('click', () => {
+        updatePopupClass('14');
+        if (selectedNum) {
+            const spans = selectedNum.querySelectorAll('span');
+            if (spans.length > 1) {
+                spans[1].textContent = 'Small';
+            }
+        }
+        updateOverlayDisplay();
+    });
+
+    numCItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const itemNumber = item.className.match(/\d+$/)[0];
+            updatePopupClass(itemNumber);
+
+            if (selectedNum) {
+                const spans = selectedNum.querySelectorAll('span');
+                if (spans.length > 1) {
+                    spans[1].textContent = itemNumber; // Update second span
+                }
+            }
+            updateOverlayDisplay();
+        });
+    });
 
     // Add click listeners to betting buttons
     bettingButtons.forEach(button => {
@@ -60,15 +101,18 @@ export function handleBettingOverlay() {
                 } else if (button === bettingOn_violet) {
                     updatePopupClass('12');
                 }
-
-                overlay?.style.removeProperty('display');
-                dialogDiv?.style.removeProperty('display');
-                document.body.classList.add('van-overflow-hidden');
+                updateOverlayDisplay();
             });
         } else {
             console.error('One or more betting buttons are missing.');
         }
     });
+
+    function updateOverlayDisplay() {
+        overlay?.style.removeProperty('display');
+        dialogDiv?.style.removeProperty('display');
+        document.body.classList.add('van-overflow-hidden');
+    }
 
     // Cancel button logic
     cancelButton?.addEventListener('click', () => {

@@ -6,6 +6,8 @@ export var money = document.querySelector('.Wallet__C-balance-l1 > div[data-v-7d
 export let bettingOn_red = document.querySelector('.Betting__C-head-r');
 export let bettingOn_violet = document.querySelector('.Betting__C-head-p');
 export let bettingOn_green = document.querySelector('.Betting__C-head-g');
+export let bettingOnNum_parent = document.querySelector('.Betting__C-numC');
+export let selectedNum = document.querySelector('.Betting__Popup-head-selectName');
 // overlays and popup
 export let overlay = document.querySelector('.van-overlay[data-v-7f36fe93]'); // select black viel
 export let dialogDiv = document.querySelector('div[role="dialog"][data-v-7f36fe93]'); // Select the dialog div
