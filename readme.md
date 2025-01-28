@@ -1,11 +1,6 @@
-# 51game web
-
-
-Here's a complete, professionally formatted README.md for your 51Game WinGo project:
-
 # 51Game WinGo - Real-time Betting System
 
-![Game Interface Preview](./preview.png) *Sample UI Structure*
+![Game Interface Preview](assets/preview.png) *Sample UI Structure*
 
 A comprehensive implementation of a real-time betting game system with multiple game modes and complex payout rules.
 
@@ -39,14 +34,12 @@ A comprehensive implementation of a real-time betting game system with multiple 
 - 🖥 Dynamic UI Updates
 - 📈 Game history tracking
 - 🎲 Random number generation
-- 📱 Android compatibility (Java timer)
 
 ## Getting Started
 
 ### Prerequisites
 - Modern browser (Chrome 90+ recommended)
 - Node.js (v16+)
-- Java Runtime Environment (for Android components)
 
 ### Installation
 ```
@@ -65,7 +58,6 @@ npm install
 | Financial Engine | Manages money calculations | `handleMoney.js`, `updateWin.js` |
 | Time Management | Period generation and timers | `offlineTimer.js`, `timer.java` |
 | Game Logic | Core rules and win conditions | `gameConfig.js`, `events.js` |
-| Data Storage | Game history and records | `test.js` (UI samples) |
 
 ## File Structure
 ```
@@ -88,12 +80,7 @@ npm install
 │   ├── 📄 updateWin.js
 │   └── 📄 utils.js
 ├── 📄 index.html
-├── 📄 readme.md
-└── 📁 public
-    ├── 📁 css
-    ├── 📁 images
-    ├── 📁 fonts
-    └── 📁 scripts
+└── 📄 readme.md
 ```
 
 ## Game Rules
@@ -129,17 +116,6 @@ function formatIssueNumber(date, totalPeriods) {
 // Example output: 20250107100051143
 ```
 
-### Android Timer Implementation
-```java
-// From timer.java
-timer.scheduleAtFixedRate(new TimerTask() {
-  public void run() {
-    // UTC-based time calculations
-    String formattedTime = String.format("   %02d  :  %02d", 0, remainingSeconds);
-  }
-}, 0, 1000);
-```
-
 ### Win Dialog Update
 ```javascript
 // From updateWin.js
@@ -157,9 +133,6 @@ function updateWinDialog() {
 - **JavaScript**: 
   - Vanilla ES6+ 
   - Web Components
-- **Java**: 
-  - `java.util.Timer`
-  - `SimpleDateFormat`
 - **Browser APIs**:
   - MutationObserver
   - DOM Manipulation
@@ -176,5 +149,3 @@ This README provides complete technical documentation with:
 4. File structure mapping
 5. Platform requirements
 6. Interactive elements (tables, code blocks)
-
-You can customize the preview image path and installation URL as needed.
