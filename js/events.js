@@ -24,7 +24,7 @@ export function initGameListEvents() {
                 const textContent = item.textContent.trim();
                 const formattedText = textContent.replace(/Go(\d+)/g, 'Go $1');
                 console.log('Game item clicked:', formattedText);
-                
+
                 handleGameItemClicked(formattedText, timeLeftName);
                 onClicked(formattedText);
             });
@@ -60,7 +60,7 @@ export function handleBettingOverlay() {
         updateOverlayDisplay();
     });
 
-    
+
     smallButton?.addEventListener('click', () => {
         updatePopupClass('14');
         if (selectedNum) {
@@ -87,22 +87,17 @@ export function handleBettingOverlay() {
         });
     });
 
-    // Add click listeners to betting buttons
+    const BETTING_CLASS_MAP = new Map([
+        [bettingOn_green, '11'],
+        [bettingOn_red, '10'],
+        [bettingOn_violet, '12']
+    ]);
+
     bettingButtons.forEach(button => {
-        if (button) {
-            button.addEventListener('click', () => {
-                if (button === bettingOn_green) {
-                    updatePopupClass('11');
-                } else if (button === bettingOn_red) {
-                    updatePopupClass('10');
-                } else if (button === bettingOn_violet) {
-                    updatePopupClass('12');
-                }
-                updateOverlayDisplay();
-            });
-        } else {
-            console.error('One or more betting buttons are missing.');
-        }
+        button?.addEventListener('click', () => {
+            updatePopupClass(BETTING_CLASS_MAP.get(button));
+            updateOverlayDisplay();
+        });
     });
 
     function updateOverlayDisplay() {
@@ -217,25 +212,29 @@ export function handleBettingOverlay_clicks() {
     const decrementBtn = document.querySelector(".Betting__Popup-btn:first-child");
     const incrementBtn = document.querySelector(".Betting__Popup-btn:last-child");
 
-    decrementBtn.addEventListener("click", function () {
+    const handleQuantityChange = (delta) => {
         let currentValue = parseInt(inputField.value) || 1;
-        if (currentValue > 1) {
-            currentValue--;
-            inputField.value = currentValue;
-            selectedQuantity = currentValue;
+        currentValue = Math.min(100, Math.max(1, currentValue + delta));
+        inputField.value = currentValue;
 
-            // Update multiplier highlighting
-            quantityItems.forEach(item => {
-                item.classList.remove("bgcolor");
-                const multiplierValue = parseInt(item.textContent.trim().replace('X', ''));
-                if (multiplierValue === currentValue) {
-                    item.classList.add("bgcolor");
-                }
-            });
+        inputField.value = currentValue;
+        selectedQuantity = currentValue;
 
-            updateTotalAmount();
-        }
-    });
+        quantityItems.forEach(item => {
+            const multiplierValue = parseInt(item.textContent.replace('X', ''));
+            item.classList.toggle('bgcolor', multiplierValue === currentValue);
+        });
+
+        quantityItems.forEach(item => item.classList.remove('bgcolor'));
+        const activeItem = [...quantityItems].find(item =>
+            parseInt(item.textContent.replace('X', '')) === currentValue
+        );
+        if (activeItem) activeItem.classList.add('bgcolor');
+
+        updateTotalAmount();
+    }
+    decrementBtn?.addEventListener("click", () => handleQuantityChange(-1));
+    incrementBtn?.addEventListener("click", () => handleQuantityChange(1));
 
     incrementBtn.addEventListener("click", function () {
         let currentValue = parseInt(inputField.value) || 1;
@@ -265,19 +264,19 @@ export function handleBettingOverlay_clicks() {
         if (newBalance < 0) {
             InsufficientBalance.style.opacity = "1";
             InsufficientBalance.style.display = "";
-            setTimeout( () => {
+            setTimeout(() => {
                 InsufficientBalance.style.opacity = "0";
                 InsufficientBalance.style.display = "none";
             }, 2000);
             return;
         }
-        
+
         money.textContent = `₹${newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        betTextToast.style.display = ""; 
+        betTextToast.style.display = "";
         overlay?.style.setProperty('display', 'none');
         dialogDiv?.style.setProperty('display', 'none');
         document.body.classList.remove('van-overflow-hidden');
-        setTimeout(function() {
+        setTimeout(function () {
             betTextToast.style.display = "none";
         }, 2000);
     });
@@ -318,13 +317,13 @@ const toggleHowToOverlay = (show = true) => {
     ruleDialog.style.display = show ? '' : 'none';
     vanOverlay.style.display = show ? '' : 'none';
     document.body.classList.toggle('van-overflow-hidden', show);
-  };
+};
 
 export function howToBtn() {
     howtoBtn.addEventListener("click", () => {
         toggleHowToOverlay(true);
         console.log(howtoBtn);
-        
+
     });
     ruleCloseBtn.addEventListener("click", () => {
         toggleHowToOverlay(false);
@@ -341,7 +340,7 @@ document.querySelectorAll('.disableVoice').forEach(element => {
 });
 
 export function checkTimeLeft5sec(timeLeft) {
-    const secondsLeft = Math.floor(timeLeft / 1000); 
+    const secondsLeft = Math.floor(timeLeft / 1000);
     console.log(secondsLeft);
     if (isVoiceDisabled) return;
     const voice1 = document.getElementById('voice1');
