@@ -19,9 +19,6 @@ export function initGameListEvents() {
         gameItems.forEach(item => {
             item.addEventListener('click', () => {
                 gameItems.forEach(innerItem => innerItem.classList.remove('active'));
-                gameItems.forEach(innerItem => {
-                    innerItem.classList.remove('active');
-                });
                 item.classList.add('active');
 
                 const textContent = item.textContent.trim();
@@ -317,16 +314,20 @@ export function handle_winLoss() {
     })
 }
 
+const toggleHowToOverlay = (show = true) => {
+    ruleDialog.style.display = show ? '' : 'none';
+    vanOverlay.style.display = show ? '' : 'none';
+    document.body.classList.toggle('van-overflow-hidden', show);
+  };
+
 export function howToBtn() {
     howtoBtn.addEventListener("click", () => {
-        ruleDialog.style.display = "";
-        vanOverlay.style.display = "block";
-        document.body.classList.add('van-overflow-hidden');
+        toggleHowToOverlay(true);
+        console.log(howtoBtn);
+        
     });
     ruleCloseBtn.addEventListener("click", () => {
-        ruleDialog.style.display = "none";
-        vanOverlay.style.display = "none";
-        document.body.classList.remove('van-overflow-hidden');
+        toggleHowToOverlay(false);
     });
 }
 
